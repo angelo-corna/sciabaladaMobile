@@ -54,19 +54,30 @@
     
   </dependencies>
   <build>
-    <finalName>SpringMVCPagination</finalName>
-    
-    <plugins>
-  <plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-compiler-plugin</artifactId>
-    <version>3.6.1</version>
-    <configuration>
-      <source>1.8</source>
-      <target>1.8</target>
-    </configuration>
-  </plugin>
-</plugins>
+	<finalName>SpringMVCPagination</finalName>
+	    
+	<plugins>
+	  <plugin>
+	    <groupId>org.apache.maven.plugins</groupId>
+	    <artifactId>maven-compiler-plugin</artifactId>
+	    <version>3.6.1</version>
+	    <configuration>
+	      <source>1.8</source>
+	      <target>1.8</target>
+	    </configuration>
+	  </plugin>
+	  
+	  <plugin>
+		<groupId>org.apache.tomcat.maven</groupId>
+		<artifactId>tomcat7-maven-plugin</artifactId>
+		<configuration>
+			<url>http://${hostname}:${port}/manager/text</url>
+			<server>${serverName}</server>
+			<path>/sciabalada</path>
+		</configuration>
+	</plugin>  		
+	  
+	</plugins>
   </build>
  
   
