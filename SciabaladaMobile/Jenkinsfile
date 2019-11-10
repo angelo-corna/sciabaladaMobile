@@ -1,0 +1,22 @@
+pipeline { 
+    agent any  
+    environment {
+        def mvn = "/home/pi/apache-maven/bin/mvn"
+    }
+    stages { 
+        stage(' Compile') { 
+            steps { 
+            	dir("SciabaladaMobile"){
+					sh '${mvn} clean install'
+ 				}
+            }
+        }
+        stage('Deploy to Tomcat'){
+			steps{
+            	dir("SciabaladaMobile"){
+	            	sh '${mvn} tomcat7:redeploy -Dhostname=ftvlogger -Dport=8080 -DserverName=ftvTomcatServer'   
+	            } 
+			}
+        }
+    }
+}
