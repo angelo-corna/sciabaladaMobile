@@ -6,6 +6,8 @@
 <head>
 		<title>Sciabalata Mobile - Statistiche</title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css">
+		<link rel="icon" type="image/png" href="../images/sciabalada.ico">
+		
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>

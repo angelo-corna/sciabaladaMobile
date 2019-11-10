@@ -6,6 +6,7 @@
 	<head>
 		<title>Sciabalata Mobile - And The Winners is ....</title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css">
+		<link rel="icon" type="image/png" href="images/sciabalada.ico">
 	</head>
 	<body>
 		<table style="width:100%" bgcolor="#000000">

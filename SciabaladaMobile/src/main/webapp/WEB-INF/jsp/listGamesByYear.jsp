@@ -5,6 +5,7 @@
 	<head>
 		<title>Sciabalata Mobile - Partite Giocate</title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css">
+		<link rel="icon" type="image/png" href="../images/sciabalada.ico">
 	</head>
 	<body>
 		<table style="width:100%" bgcolor="#000000">
@@ -19,7 +20,7 @@
 		<br>
 		<table style="width:80%" align=center>
 			<tr><td><H5O>&nbsp</H5O></td></tr>
-			<tr><td><H3O>Totale Partite Giocate: ${gamesByYearList.size()}</H3O></td></tr>
+			<tr><td align="center"><H3O>Totale Partite Giocate: ${gamesByYearList.size()}</H3O></td></tr>
 			<tr><td><H5O>&nbsp</H5O></td></tr>
 		</table>
 		
