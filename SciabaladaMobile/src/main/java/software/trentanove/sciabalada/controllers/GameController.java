@@ -1,13 +1,15 @@
 package software.trentanove.sciabalada.controllers;   
 
 import java.util.ArrayList;
-import java.util.List;  
-import org.springframework.beans.factory.annotation.Autowired;  
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;  
-import org.springframework.web.bind.annotation.PathVariable;  
-import org.springframework.web.bind.annotation.RequestMapping;  
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,6 +20,9 @@ import software.trentanove.sciabalada.dao.GameDao;
 public class GameController {  
     @Autowired  
     GameDao dao;//will inject dao from xml file  
+
+    @Value("${token}") private String tokenValue;
+    @Value("${chatId}") private String chatIdValue;
       
     @RequestMapping("/newGame")  
     public String showform(Model m){  
@@ -28,6 +33,7 @@ public class GameController {
     @RequestMapping(value="/save",method = RequestMethod.POST)  
     public String save(@ModelAttribute("game") Game game){  
         dao.saveGame(game);  
+        dao.sendTelegramNotification(game, tokenValue, chatIdValue);
         return "redirect:/winner;"; 
     }  
     
@@ -80,7 +86,6 @@ public class GameController {
     	}else {
         	balanceGames = dao.getChartGamesByYear(year);  
     	}
-    	float lossAngelo = 0;
     	float balanceAngelo = 0;
     	float balanceCo = 0;
     	float balanceKatia = 0;

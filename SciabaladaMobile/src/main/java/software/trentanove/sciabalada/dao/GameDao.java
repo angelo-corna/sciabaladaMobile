@@ -1,13 +1,17 @@
 package software.trentanove.sciabalada.dao;  
-import java.sql.ResultSet;  
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;  
-import org.springframework.jdbc.core.BeanPropertyRowMapper;  
-import org.springframework.jdbc.core.JdbcTemplate;  
+import java.util.List;
+
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import software.trentanove.sciabalada.beans.Game;  
   
@@ -62,7 +66,7 @@ public class GameDao {
 	
 	public List<Game> getGamesByYear(String year){  
 	    return template.query("select id,DATE_FORMAT(date, \"%d-%m-%Y\"),DATE_FORMAT(date, \"%Y\"),kind,jackpot,winner from games "
-	    		+ "where year(date) = ? order by date desc",new Object[] {year},new RowMapper<Game>(){  
+	    		+ "where year(date) = ? order by id desc",new Object[] {year},new RowMapper<Game>(){  
 	        public Game mapRow(ResultSet rs, int row) throws SQLException {  
 	        	Game g=new Game();  
 	            g.setId(rs.getInt(1)); 
@@ -142,5 +146,30 @@ public class GameDao {
 	        }
 	    });
 	}  
+	
+	public void sendTelegramNotification(Game g, String tokenValue, String chatIdValue){  
+		
+    	String urlString = "https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=%s";
+
+    	String apiToken = tokenValue;
+    	String chatId = chatIdValue;
+    	String winner = g.getWinner();
+    	if(winner.equals("Angelo")){
+    		winner = "The King";
+    	}
+    	String sciabaladaURL = ServletUriComponentsBuilder.fromCurrentRequest().toUriString().replace("/save","");
+    	String text = "Nuova Partita Registrata%0AData: " + g.getGameDate() + "%0AWinner: " + winner + "%0AJackpot: " + g.getJackpot() + " euro%0A" + sciabaladaURL +"/listGamesByYear/" + g.getGameDate().substring(0,4);
+
+    	urlString = String.format(urlString, apiToken, chatId, text);
+
+        try {
+            URL url = new URL(urlString);
+            URLConnection conn = url.openConnection();
+            InputStream is = new BufferedInputStream(conn.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+	} 
 
 }  
