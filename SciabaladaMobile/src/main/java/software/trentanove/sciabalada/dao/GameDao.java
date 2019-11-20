@@ -66,7 +66,7 @@ public class GameDao {
 	
 	public List<Game> getGamesByYear(String year){  
 	    return template.query("select id,DATE_FORMAT(date, \"%d-%m-%Y\"),DATE_FORMAT(date, \"%Y\"),kind,jackpot,winner from games "
-	    		+ "where year(date) = ? order by id desc",new Object[] {year},new RowMapper<Game>(){  
+	    		+ "where year(date) = ? order by date desc,id desc",new Object[] {year},new RowMapper<Game>(){  
 	        public Game mapRow(ResultSet rs, int row) throws SQLException {  
 	        	Game g=new Game();  
 	            g.setId(rs.getInt(1)); 
