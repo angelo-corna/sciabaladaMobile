@@ -44,7 +44,7 @@
 		  					<td colspan="2"><H2><br></H2></td>
 						</tr>	
 					  	<tr>
-					  		<td align="right"><a href="newGame"><img src="images/list.png"></a></td>
+					  		<td align="right"><a href="listYearsView"><img src="images/list.png"></a></td>
 					  		<td align="center"><a href="listYearsView">Partite Giocate</a></td>
 						</tr>
 						<tr>
@@ -54,7 +54,7 @@
 					  		<td colspan="2"><H2><br></H2></td>
 						</tr>	
 					  	<tr>
-					  		<td align="right"><a href="newGame"><img src="images/chart.png"></a></td>
+					  		<td align="right"><a href="listYearsViewStatistics"><img src="images/chart.png"></a></td>
 					  		<td align="center"><a href="listYearsViewStatistics">Statistiche</a></td>
 						</tr>
 		  			</table>
