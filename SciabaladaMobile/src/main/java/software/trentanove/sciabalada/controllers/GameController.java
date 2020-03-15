@@ -1,7 +1,15 @@
 package software.trentanove.sciabalada.controllers;   
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -311,6 +319,88 @@ public class GameController {
         m.addAttribute("won",won);
         return "wonGamesChart";  
     }     
+    
+    @RequestMapping("/covid19")  
+    public String covid19(Model m){
+    	List<Game> codGames = new ArrayList<Game>();
+    	Map <String, Float> gamersMap = new HashMap<String, Float>();
+
+    	codGames = dao.getCovid19Data();  
+    	
+    	for(Game codGame : codGames) {
+	    	Float bet = codGame.getBet();
+	    	String gamers = codGame.getGamers();
+	    	String winner = codGame.getWinner();
+	    	
+	    	String[] gamersP = gamers.split(",");
+	    	for(int i=0; i < gamersP.length; i++) {
+
+	    		Float cash = bet;
+    			String gamer = gamersP[i];
+    			if(!gamer.equals(winner)) {
+    				cash = bet * -1;
+    			} else {
+    				cash = bet * (gamersP.length - 1);
+    			}
+	    		if(gamersMap.containsKey(gamer)) {
+	    			Float gamerCash = gamersMap.get(gamer);
+	    			Float newGamerCash = gamerCash + cash;
+	    			gamersMap.put(gamer, newGamerCash);
+	    		}else{
+	    			gamersMap.put(gamer,cash);
+	    		}
+	    		
+	    	}
+	    }
+    	
+    	Map<String, Float> sortedGamersMap = sortByComparator(gamersMap, false);
+    	
+    	List<String[]> gamersCovid19 = new ArrayList<String[]>();
+    	//String[] gamersCovid19[];
+    	
+		Iterator<Entry<String, Float>> it = sortedGamersMap.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<String, Float> pair = (Map.Entry<String, Float>) it.next();
+			String[] gamerCovid19 = new String[]{ pair.getKey(), String.valueOf(pair.getValue()) }; 
+			gamersCovid19.add(gamerCovid19);
+		}
+
+        m.addAttribute("gamersCovid19",gamersCovid19);
+        return "covid19";  
+    } 
+    
+    private static Map<String, Float> sortByComparator(Map<String, Float> unsortMap, final boolean order)
+    {
+
+        List<Entry<String, Float>> list = new LinkedList<Entry<String, Float>>(unsortMap.entrySet());
+
+        // Sorting the list based on values
+        Collections.sort(list, new Comparator<Entry<String, Float>>()
+        {
+            public int compare(Entry<String, Float> o1,
+                    Entry<String, Float> o2)
+            {
+                if (order)
+                {
+                    return o1.getValue().compareTo(o2.getValue());
+                }
+                else
+                {
+                    return o2.getValue().compareTo(o1.getValue());
+
+                }
+            }
+        });
+
+        // Maintaining insertion order with the help of LinkedList
+        Map<String, Float> sortedMap = new LinkedHashMap<String, Float>();
+        for (Entry<String, Float> entry : list)
+        {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+
+        return sortedMap;
+    }
 
 }  
 

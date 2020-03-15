@@ -4,7 +4,7 @@
 
 <html>
 <head>
-		<title>Sciabalata Mobile - Statistiche</title>
+		<title>Sciabalada Mobile - Statistiche</title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css">
 		<link rel="icon" type="image/png" href="../images/sciabalada.ico">
 		

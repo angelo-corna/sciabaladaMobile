@@ -169,7 +169,18 @@ public class GameDao {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-	} 
+	}
+	
+	public List<Game> getCovid19Data(){  
+		return template.query("select bet,gamers,winner from games where date > '2020-03-02'",new RowMapper<Game>(){  
+	        public Game mapRow(ResultSet rs, int row) throws SQLException {  
+	        	Game g=new Game();  
+	            g.setBet(rs.getFloat(1)); 
+	            g.setGamers(rs.getString(2)); 
+	            g.setWinner(rs.getString(3)); 
+	            return g;  
+	        }
+	    });
+	}  
 
 }  
