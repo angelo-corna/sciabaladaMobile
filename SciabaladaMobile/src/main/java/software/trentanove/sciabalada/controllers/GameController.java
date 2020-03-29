@@ -366,6 +366,7 @@ public class GameController {
 		}
 
         m.addAttribute("gamersCovid19",gamersCovid19);
+        m.addAttribute("gamesNumber",codGames.size());
         return "covid19";  
     } 
     

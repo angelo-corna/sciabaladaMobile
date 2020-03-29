@@ -18,7 +18,12 @@
 		</table>
 
 		<table style="width:80%" align=center>
-				
+			<tr><td><H5O>&nbsp</H5O></td></tr>
+			<tr><td><H5O>&nbsp</H5O></td></tr>
+			<tr><td align="center"><H3O>Totale Partite Giocate: ${gamesNumber}</H3O></td></tr>
+		</table>
+
+		<table style="width:80%" align=center>
 			    	<c:forEach var="gamerCovid19" items="${gamersCovid19}"> 
 						<tr><td><H1O>&nbsp</H1O></td></tr>
 						<tr>
