@@ -59,7 +59,7 @@
 						<tr><td><H5O>&nbsp</H5O></td></tr>
 						<tr>
 							<td><h3W>Puntata&nbsp&nbsp&nbsp</H3W></td>
-							<td><form:input path="bet" type="number" id="bet" min="1" max="20" value="3"/></td>
+							<td><form:input path="bet" type="number" id="bet" min="1" max="20" value="1"/></td>
 						</tr>
 						<tr>
 							<td>&nbsp</td>
