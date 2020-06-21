@@ -172,7 +172,11 @@ public class GameDao {
 	}
 	
 	public List<Game> getCovid19Data(){  
-		return template.query("select bet,gamers,winner from games where date > '2020-03-02'",new RowMapper<Game>(){  
+//		return template.query("select bet,gamers,winner from games where date > '2020-03-02'",new RowMapper<Game>(){  
+		return template.query("(select bet,gamers,winner from games where date > '2020-03-02' and date < '2020-06-20') "
+				+ "union "
+				+ "(select bet,gamers,winner from games where date > '2020-06-19' and (bet = 1 or bet = 2 or bet =4)",new RowMapper<Game>(){  	
+			
 	        public Game mapRow(ResultSet rs, int row) throws SQLException {  
 	        	Game g=new Game();  
 	            g.setBet(rs.getFloat(1)); 

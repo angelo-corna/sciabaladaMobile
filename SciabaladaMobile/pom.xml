@@ -4,7 +4,7 @@
   <groupId>software.trentanove</groupId>
   <artifactId>Sciabalada</artifactId>
   <packaging>war</packaging>
-  <version>1.0.3.7</version>
+  <version>1.0.3.8</version>
   <name>Sciabalada Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
