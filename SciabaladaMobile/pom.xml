@@ -75,7 +75,13 @@
 			<server>${serverName}</server>
 			<path>/sciabalada</path>
 		</configuration>
-	</plugin>  		
+	</plugin>  	
+		
+	<plugin>
+	    <groupId>org.apache.maven.plugins</groupId>
+	    <artifactId>maven-war-plugin</artifactId>
+	    <version>3.3.1</version>
+	</plugin>
 	  
 	</plugins>
   </build>
