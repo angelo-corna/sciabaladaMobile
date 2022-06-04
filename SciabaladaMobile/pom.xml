@@ -54,7 +54,7 @@
     
   </dependencies>
   <build>
-	<finalName>SpringMVCPagination</finalName>
+	<finalName>sciabaladaMobile</finalName>
 	    
 	<plugins>
 	  <plugin>
