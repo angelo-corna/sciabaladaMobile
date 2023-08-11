@@ -1,0 +1,13 @@
+pipeline { 
+    agent any  
+    environment {
+        def mvn = "/home/pi/apache-maven/bin/mvn"
+    }
+    stages { 
+        stage(' Deploy') { 
+            steps { 
+				echo "deploy"
+			}
+        }
+    }
+}
