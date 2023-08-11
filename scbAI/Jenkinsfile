@@ -8,6 +8,8 @@ pipeline {
             steps { 
 				sh "rm -rf /home/pi/scbAI/*"
 				sh "cp -R ${WORKSPACE}/scbAI/* /home/pi/scbAI"
+				sh "rm /home/pi/scbAI/Jenkinsfile"
+				sh "rm /home/pi/scbAI/readme.md"
 			}
         }
     }
