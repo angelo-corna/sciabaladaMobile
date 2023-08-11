@@ -6,10 +6,10 @@ pipeline {
     stages { 
         stage(' Deploy') { 
             steps { 
-				sh "rm -rf /home/pi/scbAI/*"
-				sh "cp -R ${WORKSPACE}/scbAI/* /home/pi/scbAI"
-				sh "rm /home/pi/scbAI/Jenkinsfile"
-				sh "rm /home/pi/scbAI/readme.md"
+				sh "sudo rm -rf /home/pi/scbAI/*"
+				sh "sudo cp -R ${WORKSPACE}/scbAI/* /home/pi/scbAI"
+				sh "sudo rm /home/pi/scbAI/Jenkinsfile"
+				sh "sudo rm /home/pi/scbAI/readme.md"
 			}
         }
     }
