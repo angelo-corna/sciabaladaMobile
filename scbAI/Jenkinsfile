@@ -6,8 +6,8 @@ pipeline {
     stages { 
         stage(' Deploy') { 
             steps { 
-				sh "rm -rf /home/pi/scbAI"
-				sh "cp -R ${WORSPACE}/scbAI /home/pi"
+				sh "rm -rf /home/pi/scbAI/*"
+				sh "cp -R ${WORSPACE}/scbAI/* /home/pi/scbAI"
 			}
         }
     }
