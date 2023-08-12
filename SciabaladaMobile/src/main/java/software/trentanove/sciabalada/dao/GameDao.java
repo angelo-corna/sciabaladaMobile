@@ -13,7 +13,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import software.trentanove.sciabalada.beans.Game;  
+import software.trentanove.sciabalada.beans.Game;
+import software.trentanove.sciabalada.beans.Prediction;  
   
 public class GameDao {  
 	JdbcTemplate template;  
@@ -79,6 +80,23 @@ public class GameDao {
 	        }  
 	    });  
 	}  
+	
+	public List<Prediction> getPrediction(){  
+	    return template.query("select DATE_FORMAT(date, \"%d-%m-%Y\"), gamer, prediction, biorhythmP, biorhythmE, biorhythmI, "
+	    		+ "predictionPerc from dailyPrediction order by predictionPerc desc",new RowMapper<Prediction>(){  
+	        public Prediction mapRow(ResultSet rs, int row) throws SQLException {  
+	        	Prediction p=new Prediction();  
+	            p.setPredictionDate(rs.getString(1)); 
+	            p.setGamer(rs.getString(2)); 
+	            p.setPrediction(Math.round(rs.getFloat(3)*100.0)/100.0); 
+	            p.setBiorhythmP(Math.round((100*rs.getFloat(4))*100.0)/100.0); 
+	            p.setBiorhythmE(Math.round((100*rs.getFloat(5))*100.0)/100.0); 
+	            p.setBiorhythmI(Math.round((100*rs.getFloat(6))*100.0)/100.0); 
+	            p.setPredictionPerc(Math.round(rs.getFloat(7)*100.0)/100.0); 
+	            return p;  
+	        }  
+	    });  
+	} 
 	
 	public Game getGameById(int id){  
 	    String sql = "select id,DATE_FORMAT(date, \"%d-%m-%Y\") as gameDate, kind, bet, reentry, ongoing, gamers, "

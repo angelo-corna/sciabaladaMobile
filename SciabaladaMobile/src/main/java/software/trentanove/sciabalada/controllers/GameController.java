@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import software.trentanove.sciabalada.beans.Game;
+import software.trentanove.sciabalada.beans.Prediction;
 import software.trentanove.sciabalada.dao.GameDao;  
 
 @Controller  
@@ -78,6 +79,13 @@ public class GameController {
         dao.deleteGame(id);  
         return "redirect://listGamesByYear/"+year;  
     }   
+    
+    @RequestMapping("/aiPrediction")  
+    public String aiPrediction(Model m){  
+        List<Prediction> predictionList=dao.getPrediction();  
+        m.addAttribute("predictionList",predictionList);
+        return "aiPrediction";  
+    } 
     
     @RequestMapping("/listYearsViewStatistics")  
     public String listYearsViewStatistics(Model m){  
