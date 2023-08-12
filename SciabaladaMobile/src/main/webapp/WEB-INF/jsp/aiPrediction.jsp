@@ -19,7 +19,7 @@
 		
 		<table style="width:80%" align=center>
 			<tr><td><H5O>&nbsp</H5O></td></tr>
-			<tr><td align="center"><H3O>Data Previsione: ${predictionList.get(0).predictionDate}</H3O></td></tr>
+			<tr><td align="center"><H4O>Data Previsione: ${predictionList.get(0).predictionDate}</H4O></td></tr>
 			<tr><td><H5O>&nbsp</H5O></td></tr>
 		</table>
 
