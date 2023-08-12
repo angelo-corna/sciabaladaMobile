@@ -82,7 +82,7 @@
 				<td align="center" colspan="2"><H1O>&nbsp</H1O></td>
 			</tr>
 			<tr>
-		  		<td align="center" colspan="2"><H5O>v 1.1.0.01</H5O></td>
+		  		<td align="center" colspan="2"><H5O>v 1.1.0.02</H5O></td>
 			</tr>
 		</table>
 	</body>
