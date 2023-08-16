@@ -59,7 +59,7 @@
 						<tr><td><H5O>&nbsp</H5O></td></tr>
 						<tr>
 							<td><h3W>Puntata&nbsp&nbsp&nbsp</H3W></td>
-							<td><form:input path="bet" type="number" id="bet" min="1" max="20" value="1"/></td>
+							<td><form:input path="bet" type="number" id="bet" min="1" max="20" value="3"/></td>
 						</tr>
 						<tr>
 							<td>&nbsp</td>
@@ -88,46 +88,46 @@
 							<td align="right"></td>
 						</tr>
 						<tr>
-							<td align="left"><form:checkbox path="gamers" value="Angelo" label=" Angelo" id="angelo"/> </td>
+							<td align="left"><form:checkbox path="gamers" value="Angelo" label=" Angelo" id="angelo" checked="checked"/> </td>
 							<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
 							<td align="center"><form:input path="reentersAngelo" type="number" id="reentersAngelo" min="0" max="100" value="0" disabled="true"/></td>
 							<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-							<td align="right"><form:radiobutton path="winner" value="Angelo" label=" Winner" id="winAngelo" disabled="true"/></td>
+							<td align="right"><form:radiobutton path="winner" value="Angelo" label=" Winner" id="winAngelo" disabled="false"/></td>
 						</tr>
 						<tr>
-							<td align="left"><form:checkbox path="gamers" value="Co" label=" Co" id="co"/>  </td>
+							<td align="left"><form:checkbox path="gamers" value="Co" label=" Co" id="co" checked="checked"/>  </td>
 							<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
 							<td align="center"><form:input path="reentersCo" type="number" id="reentersCo" min="0" max="100" value="0" disabled="true"/></td>
 							<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-							<td align="right"><form:radiobutton path="winner" value="Co" label=" Winner" id="winCo" disabled="true"/></td>
+							<td align="right"><form:radiobutton path="winner" value="Co" label=" Winner" id="winCo" disabled="false"/></td>
 						</tr>
 						<tr>
-							<td align="left"><form:checkbox path="gamers" value="Katia" label=" Katia" id="katia"/>   </td>
+							<td align="left"><form:checkbox path="gamers" value="Katia" label=" Katia" id="katia" checked="checked"/>   </td>
 							<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
 							<td align="center"><form:input path="reentersKatia" type="number" id="reentersKatia" min="0" max="100" value="0" disabled="true"/></td>
 							<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-							<td align="right"><form:radiobutton path="winner" value="Katia" label=" Winner" id="winKatia" disabled="true"/></td>
+							<td align="right"><form:radiobutton path="winner" value="Katia" label=" Winner" id="winKatia" disabled="false"/></td>
 						</tr>
 						<tr>
-							<td align="left"><form:checkbox path="gamers" value="Mario" label=" Mario" id="mario"/></td>
+							<td align="left"><form:checkbox path="gamers" value="Mario" label=" Mario" id="mario" checked="checked"/></td>
 							<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
 							<td align="center"><form:input path="reentersMario" type="number" id="reentersMario" min="0" max="100" value="0" disabled="true"/></td>
 							<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-							<td align="right"><form:radiobutton path="winner" value="Mario" label=" Winner" id="winMario" disabled="true"/></td>
+							<td align="right"><form:radiobutton path="winner" value="Mario" label=" Winner" id="winMario" disabled="false"/></td>
 						</tr>
 						<tr>
-							<td align="left"><form:checkbox path="gamers" value="Mauro" label=" Mauro" id="mauro"/></td>
+							<td align="left"><form:checkbox path="gamers" value="Mauro" label=" Mauro" id="mauro" checked="checked"/></td>
 							<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
 							<td align="center"><form:input path="reentersMauro" type="number" id="reentersMauro" min="0" max="100" value="0" disabled="true"/></td>
 							<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-							<td align="right"><form:radiobutton path="winner" value="Mauro" label=" Winner" id="winMauro" disabled="true"/></td>
+							<td align="right"><form:radiobutton path="winner" value="Mauro" label=" Winner" id="winMauro" disabled="false"/></td>
 						</tr>
 						<tr>
-							<td align="left"><form:checkbox path="gamers" value="Renzo" label=" Renzo" id="renzo"/></td> 
+							<td align="left"><form:checkbox path="gamers" value="Renzo" label=" Renzo" id="renzo" checked="checked"/></td> 
 							<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
 							<td align="center"><form:input path="reentersRenzo" type="number" id="reentersRenzo" min="0" max="100" value="0" disabled="true"/></td>
 							<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-							<td align="right"><form:radiobutton path="winner" value="Renzo" label=" Winner" id="winRenzo" disabled="true"/></td>
+							<td align="right"><form:radiobutton path="winner" value="Renzo" label=" Winner" id="winRenzo" disabled="false"/></td>
 						</tr>
 						<tr>
 							<td align="left"><form:checkbox path="gamers" value="Guest1" label=" Guest1" id="guest1"/></td>
@@ -165,7 +165,7 @@
 			<tr><td><H5O>&nbsp</H5O></td></tr>
 			<tr>	
 				<td align="center">	
-					<form:input path="jackpot" type="number" id="jackpot" value="0" style="pointer-events: none;"/>
+					<form:input path="jackpot" type="number" id="jackpot" value="18" style="pointer-events: none;"/>
 				</td>	
 
 			</tr>
