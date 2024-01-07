@@ -1,0 +1,6 @@
+#per creare il war da shell
+cd /Users/angelo/git/sciabaladaMobile/SciabaladaMobile/target
+export JAVA_HOME=`/usr/libexec/java_home -v 11.0`
+mvn clean package
+
+viene creato il file target/sciabalada.war

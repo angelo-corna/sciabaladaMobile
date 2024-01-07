@@ -54,7 +54,7 @@
     
   </dependencies>
   <build>
-	<finalName>sciabaladaMobile</finalName>
+	<finalName>sciabalada</finalName>
 	    
 	<plugins>
 	  <plugin>
