@@ -42,7 +42,7 @@ public class GameController {
     @RequestMapping(value="/save",method = RequestMethod.POST)  
     public String save(@ModelAttribute("game") Game game){  
         dao.saveGame(game);  
-        //dao.sendTelegramNotification(game, tokenValue, chatIdValue);
+        dao.sendTelegramNotification(game, tokenValue, chatIdValue);
         return "redirect:/winner;"; 
     }  
     
