@@ -59,6 +59,16 @@
 					  		<td colspan="2"><H2><br></H2></td>
 						</tr>	
 					  	<tr>
+					  		<td align="right"><a href="jackpot"><img src="images/dollar.png"></a></td>
+					  		<td align="center"><a href="jackpot">Montepremi</a></td>
+						</tr>
+						<tr>
+					  		<td colspan="2"><H2><br></H2></td>
+						</tr>						
+						<tr>
+					  		<td colspan="2"><H2><br></H2></td>
+						</tr>	
+					  	<tr>
 					  		<td align="right"><a href="aiPrediction"><img src="images/ai.png"></a></td>
 					  		<td align="center"><a href="aiPrediction">Previsione AI</a></td>
 						</tr>
@@ -82,7 +92,7 @@
 				<td align="center" colspan="2"><H1O>&nbsp</H1O></td>
 			</tr>
 			<tr>
-		  		<td align="center" colspan="2"><H5O>v 1.1.0.02</H5O></td>
+		  		<td align="center" colspan="2"><H5O>v 1.2.0.00</H5O></td>
 			</tr>
 		</table>
 	</body>

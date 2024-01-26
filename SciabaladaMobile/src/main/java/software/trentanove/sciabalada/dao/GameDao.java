@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import software.trentanove.sciabalada.beans.Game;
+import software.trentanove.sciabalada.beans.JackpotWinner;
 import software.trentanove.sciabalada.beans.Prediction;  
   
 public class GameDao {  

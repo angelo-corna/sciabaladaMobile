@@ -1,5 +1,6 @@
 package software.trentanove.sciabalada.controllers;   
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import software.trentanove.sciabalada.beans.Game;
+import software.trentanove.sciabalada.beans.JackpotWinner;
 import software.trentanove.sciabalada.beans.Prediction;
 import software.trentanove.sciabalada.dao.GameDao;  
 
@@ -87,6 +89,47 @@ public class GameController {
         return "aiPrediction";  
     } 
     
+    @RequestMapping("/jackpot")  
+    public String jackpot(Model m){  
+    	
+    	List<Game> balanceGames = new ArrayList<Game>();
+    	String currentYear = Integer.toString(Year.now().getValue());
+    	balanceGames = dao.getChartGamesByYear(currentYear);  
+    	double jackpot = getYearJackpot( balanceGames );
+    	HashMap<String, Float> winners = getBalance( balanceGames );
+    	
+    	List<JackpotWinner> jackpotWinners = new ArrayList<JackpotWinner>(); 
+    	int numWinners = 1;
+		double winPerc = 0;
+    	for (String i : winners.keySet()) {
+    		if ( numWinners == 1) {
+    			winPerc = 0.5;
+    		} else if ( numWinners == 2) {
+    			winPerc = 0.3;
+    		} else if ( numWinners == 3) {
+    			winPerc = 0.2;
+    		} else {
+    			break;
+    		}
+    		
+   			JackpotWinner winner = new JackpotWinner();
+   			double winJack = jackpot * winPerc;
+   			double winJackRounded = Math.round(winJack * 100.0) / 100.0;
+   			winner.setWinner(i);
+   			winner.setJackpot(winJackRounded);
+   			jackpotWinners.add(winner);
+    		
+   			numWinners++;
+		}
+    	
+    	
+    	m.addAttribute("currentYear",currentYear);
+    	m.addAttribute("jackpot",jackpot);
+    	m.addAttribute("jackpotWinners",jackpotWinners);
+
+    	return "jackpot";  
+    } 
+    
     @RequestMapping("/listYearsViewStatistics")  
     public String listYearsViewStatistics(Model m){  
         List<String> yearsListStatistics=dao.getYears();  
@@ -102,111 +145,21 @@ public class GameController {
     	}else {
         	balanceGames = dao.getChartGamesByYear(year);  
     	}
-    	float balanceAngelo = 0;
-    	float balanceCo = 0;
-    	float balanceKatia = 0;
-    	float balanceMario = 0;
-    	float balanceMauro = 0;
-    	float balanceRenzo = 0;
-    	float balanceKarmen = 0;
-    	float balanceOthers = 0;
-    	for(Game balanceGame : balanceGames) {
-    		
-    		//add jackpot
-    		String winner = balanceGame.getWinner();
-    		switch(winner){
-	    		case "Angelo":
-	    			balanceAngelo = balanceAngelo + balanceGame.getJackpot();
-	    			break;
-	    		case "Co":
-	    			balanceCo = balanceCo + balanceGame.getJackpot();
-	    			break;
-	    		case "Katia":
-	    			balanceKatia = balanceKatia + balanceGame.getJackpot();
-	    			break;
-	    		case "Mario":
-	    			balanceMario = balanceMario + balanceGame.getJackpot();
-	    			break;
-	    		case "Mauro":
-	    			balanceMauro = balanceMauro + balanceGame.getJackpot();
-	    			break;
-	    		case "Renzo":
-	    			balanceRenzo = balanceRenzo + balanceGame.getJackpot();
-	    			break;
-	    		case "Karmen":
-	    			balanceKarmen = balanceKarmen + balanceGame.getJackpot();
-	    			break;
-	    		default:
-	    			balanceOthers = balanceOthers + balanceGame.getJackpot();
-    		}
-    		
-    		//remove loss
-    		String gamers = balanceGame.getGamers();
-    		String[] gamersP = gamers.split(",");
-    		for(int z = 0; z < gamersP.length; z++){
-    			String gamer = gamersP[z];
-        		switch(gamer){
-	        		case "Angelo":
-	        			balanceAngelo = balanceAngelo - balanceGame.getBet() - (balanceGame.getReentersAngelo() * balanceGame.getReentry());
-	        			break;
-	        		case "Co":
-	        			balanceCo = balanceCo - balanceGame.getBet() - (balanceGame.getReentersCo() * balanceGame.getReentry());
-	        			break;
-	        		case "Katia":
-	        			balanceKatia = balanceKatia - balanceGame.getBet() - (balanceGame.getReentersKatia() * balanceGame.getReentry());
-	        			break;
-	        		case "Mario":
-	        			balanceMario = balanceMario - balanceGame.getBet() - (balanceGame.getReentersMario() * balanceGame.getReentry());
-	        			break;
-	        		case "Mauro":
-	        			balanceMauro = balanceMauro - balanceGame.getBet() - (balanceGame.getReentersMauro() * balanceGame.getReentry());
-	        			break;
-	        		case "Renzo":
-	        			balanceRenzo = balanceRenzo - balanceGame.getBet() - (balanceGame.getReentersRenzo() * balanceGame.getReentry());
-	        			break;
-	        		case "Karmen":
-	        			balanceKarmen = balanceKarmen - balanceGame.getBet() - (balanceGame.getReentersKarmen() * balanceGame.getReentry());
-	        			break;
-	        		case "Guest1":
-	        			balanceOthers = balanceOthers - balanceGame.getBet() - (balanceGame.getReentersGuest1() * balanceGame.getReentry());
-	        			break;
-	        		case "Guest2":
-	        			balanceOthers = balanceOthers - balanceGame.getBet() - (balanceGame.getReentersGuest2() * balanceGame.getReentry());
-	        			break;
-	        		case "Guest3":
-	        			balanceOthers = balanceOthers - balanceGame.getBet() - (balanceGame.getReentersGuest3() * balanceGame.getReentry());
-	        			break;
-	        		}
-    		}
-    	}
+
+    	
     	
 		List<String> balance = new ArrayList<String>();
 		balance.add("'Nome', 'Saldo'");
-		if(balanceAngelo != 0 ) {
-			balance.add("'Angelo', " + balanceAngelo);
+		
+		HashMap<String, Float> winners = getBalance( balanceGames );
+		
+		for (String i : winners.keySet()) {
+			Float winnerJackpot = winners.get(i);
+			if ( winnerJackpot != 0 ) {
+				balance.add( "'" + i + "', " + String.valueOf(winnerJackpot) );
+			}
 		}
-		if(balanceCo != 0 ) {
-			balance.add("'Co', " + balanceCo);
-		}
-		if(balanceKarmen != 0 ) {
-			balance.add("'Karmen', " + balanceKarmen);	
-		}
-		if(balanceKatia != 0 ) {
-			balance.add("'Katia', " + balanceKatia);
-		}
-		if(balanceMario != 0 ) {
-			balance.add("'Mario', " + balanceMario);	
-		}
-		if(balanceMauro != 0 ) {
-			balance.add("'Mauro', " + balanceMauro);	
-		}
-		if(balanceRenzo != 0 ) {
-			balance.add("'Renzo', " + balanceRenzo);	
-		}
-		if(balanceOthers != 0 ) {
-			balance.add("'Others', " + balanceOthers);	
-		}
-
+		
         m.addAttribute("balance",balance);
         return "balanceChart";  
     }  
@@ -409,6 +362,123 @@ public class GameController {
         }
 
         return sortedMap;
+    }
+    
+    private static HashMap<String, Float> getBalance(List<Game> balanceGames){
+    
+		float balanceAngelo = 0;
+		float balanceCo = 0;
+		float balanceKatia = 0;
+		float balanceMario = 0;
+		float balanceMauro = 0;
+		float balanceRenzo = 0;
+		float balanceKarmen = 0;
+		float balanceOthers = 0;
+		for(Game balanceGame : balanceGames) {
+			
+			//add jackpot
+			String winner = balanceGame.getWinner();
+			switch(winner){
+	    		case "Angelo":
+	    			balanceAngelo = balanceAngelo + balanceGame.getJackpot();
+	    			break;
+	    		case "Co":
+	    			balanceCo = balanceCo + balanceGame.getJackpot();
+	    			break;
+	    		case "Katia":
+	    			balanceKatia = balanceKatia + balanceGame.getJackpot();
+	    			break;
+	    		case "Mario":
+	    			balanceMario = balanceMario + balanceGame.getJackpot();
+	    			break;
+	    		case "Mauro":
+	    			balanceMauro = balanceMauro + balanceGame.getJackpot();
+	    			break;
+	    		case "Renzo":
+	    			balanceRenzo = balanceRenzo + balanceGame.getJackpot();
+	    			break;
+	    		case "Karmen":
+	    			balanceKarmen = balanceKarmen + balanceGame.getJackpot();
+	    			break;
+	    		default:
+	    			balanceOthers = balanceOthers + balanceGame.getJackpot();
+			}
+			
+			//remove loss
+			String gamers = balanceGame.getGamers();
+			String[] gamersP = gamers.split(",");
+			for(int z = 0; z < gamersP.length; z++){
+				String gamer = gamersP[z];
+	    		switch(gamer){
+	        		case "Angelo":
+	        			balanceAngelo = balanceAngelo - balanceGame.getBet() - (balanceGame.getReentersAngelo() * balanceGame.getReentry());
+	        			break;
+	        		case "Co":
+	        			balanceCo = balanceCo - balanceGame.getBet() - (balanceGame.getReentersCo() * balanceGame.getReentry());
+	        			break;
+	        		case "Katia":
+	        			balanceKatia = balanceKatia - balanceGame.getBet() - (balanceGame.getReentersKatia() * balanceGame.getReentry());
+	        			break;
+	        		case "Mario":
+	        			balanceMario = balanceMario - balanceGame.getBet() - (balanceGame.getReentersMario() * balanceGame.getReentry());
+	        			break;
+	        		case "Mauro":
+	        			balanceMauro = balanceMauro - balanceGame.getBet() - (balanceGame.getReentersMauro() * balanceGame.getReentry());
+	        			break;
+	        		case "Renzo":
+	        			balanceRenzo = balanceRenzo - balanceGame.getBet() - (balanceGame.getReentersRenzo() * balanceGame.getReentry());
+	        			break;
+	        		case "Karmen":
+	        			balanceKarmen = balanceKarmen - balanceGame.getBet() - (balanceGame.getReentersKarmen() * balanceGame.getReentry());
+	        			break;
+	        		case "Guest1":
+	        			balanceOthers = balanceOthers - balanceGame.getBet() - (balanceGame.getReentersGuest1() * balanceGame.getReentry());
+	        			break;
+	        		case "Guest2":
+	        			balanceOthers = balanceOthers - balanceGame.getBet() - (balanceGame.getReentersGuest2() * balanceGame.getReentry());
+	        			break;
+	        		case "Guest3":
+	        			balanceOthers = balanceOthers - balanceGame.getBet() - (balanceGame.getReentersGuest3() * balanceGame.getReentry());
+	        			break;
+	        		}
+			}
+		}
+		
+		HashMap<String, Float> winnersMap = new HashMap<String, Float>();
+		winnersMap.put("Angelo", balanceAngelo);
+		winnersMap.put("Co", balanceCo);
+		winnersMap.put("Karmen", balanceKarmen);
+		winnersMap.put("Katia", balanceKatia);
+		winnersMap.put("Mario", balanceMario);
+		winnersMap.put("Mauro", balanceMauro);
+		winnersMap.put("Renzo", balanceRenzo);
+		winnersMap.put("Others", balanceOthers);
+		
+        List<Map.Entry<String, Float>> list = new LinkedList<Map.Entry<String, Float>>(winnersMap.entrySet());
+
+        Collections.sort(list, new Comparator<Map.Entry<String, Float>> () {
+            public int compare(Map.Entry<String, Float> o1, Map.Entry<String, Float> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
+        Collections.reverse(list);
+        HashMap<String, Float> sortedMap = new LinkedHashMap<String, Float>();
+        for (Entry<String, Float> entry : list) {
+          sortedMap.put(entry.getKey(), entry.getValue());
+        }
+        return sortedMap;
+    	
+    }
+
+    private static double getYearJackpot(List<Game> balanceGames){
+        
+    	double yearJackpot = 0;
+		for(Game balanceGame : balanceGames) {
+			String gamers = balanceGame.getGamers();
+			int numParticipants = gamers.split(",").length;
+			yearJackpot = yearJackpot + (numParticipants * 0.5);
+		}
+		return yearJackpot;
     }
 
 }  
