@@ -155,9 +155,9 @@ public class GameController {
 		
 		for (String i : winners.keySet()) {
 			Float winnerJackpot = winners.get(i);
-			if ( winnerJackpot != 0 ) {
+			//if ( winnerJackpot != 0 ) {
 				balance.add( "'" + i + "', " + String.valueOf(winnerJackpot) );
-			}
+			//}
 		}
 		
         m.addAttribute("balance",balance);
@@ -374,6 +374,16 @@ public class GameController {
 		float balanceRenzo = 0;
 		float balanceKarmen = 0;
 		float balanceOthers = 0;
+		
+		int gamesAngelo = 0;
+		int gamesCo = 0;
+		int gamesKatia = 0;
+		int gamesMario = 0;
+		int gamesMauro = 0;
+		int gamesRenzo = 0;
+		int gamesKarmen = 0;
+		int gamesOthers = 0;
+		
 		for(Game balanceGame : balanceGames) {
 			
 			//add jackpot
@@ -412,47 +422,73 @@ public class GameController {
 	    		switch(gamer){
 	        		case "Angelo":
 	        			balanceAngelo = balanceAngelo - balanceGame.getBet() - (balanceGame.getReentersAngelo() * balanceGame.getReentry());
+	        			gamesAngelo++;
 	        			break;
 	        		case "Co":
 	        			balanceCo = balanceCo - balanceGame.getBet() - (balanceGame.getReentersCo() * balanceGame.getReentry());
+	        			gamesCo++;
 	        			break;
 	        		case "Katia":
 	        			balanceKatia = balanceKatia - balanceGame.getBet() - (balanceGame.getReentersKatia() * balanceGame.getReentry());
+	        			gamesKatia++;
 	        			break;
 	        		case "Mario":
 	        			balanceMario = balanceMario - balanceGame.getBet() - (balanceGame.getReentersMario() * balanceGame.getReentry());
+	        			gamesMario++;
 	        			break;
 	        		case "Mauro":
 	        			balanceMauro = balanceMauro - balanceGame.getBet() - (balanceGame.getReentersMauro() * balanceGame.getReentry());
+	        			gamesMauro++;
 	        			break;
 	        		case "Renzo":
 	        			balanceRenzo = balanceRenzo - balanceGame.getBet() - (balanceGame.getReentersRenzo() * balanceGame.getReentry());
+	        			gamesRenzo++;
 	        			break;
 	        		case "Karmen":
 	        			balanceKarmen = balanceKarmen - balanceGame.getBet() - (balanceGame.getReentersKarmen() * balanceGame.getReentry());
+	        			gamesKarmen++;
 	        			break;
 	        		case "Guest1":
 	        			balanceOthers = balanceOthers - balanceGame.getBet() - (balanceGame.getReentersGuest1() * balanceGame.getReentry());
+	        			gamesOthers++;
 	        			break;
 	        		case "Guest2":
 	        			balanceOthers = balanceOthers - balanceGame.getBet() - (balanceGame.getReentersGuest2() * balanceGame.getReentry());
+	        			gamesOthers++;
 	        			break;
 	        		case "Guest3":
 	        			balanceOthers = balanceOthers - balanceGame.getBet() - (balanceGame.getReentersGuest3() * balanceGame.getReentry());
+	        			gamesOthers++;
 	        			break;
 	        		}
 			}
 		}
 		
 		HashMap<String, Float> winnersMap = new HashMap<String, Float>();
-		winnersMap.put("Angelo", balanceAngelo);
-		winnersMap.put("Co", balanceCo);
-		winnersMap.put("Karmen", balanceKarmen);
-		winnersMap.put("Katia", balanceKatia);
-		winnersMap.put("Mario", balanceMario);
-		winnersMap.put("Mauro", balanceMauro);
-		winnersMap.put("Renzo", balanceRenzo);
-		winnersMap.put("Others", balanceOthers);
+		if ( gamesAngelo > 0 ) {
+			winnersMap.put("Angelo", balanceAngelo);
+		}
+		if ( gamesCo > 0 ) {
+			winnersMap.put("Co", balanceCo);
+		}
+		if ( gamesKarmen > 0 ) {
+			winnersMap.put("Karmen", balanceKarmen);
+		}
+		if ( gamesKatia > 0 ) {
+			winnersMap.put("Katia", balanceKatia);
+		}
+		if ( gamesMario > 0 ) {
+			winnersMap.put("Mario", balanceMario);
+		}
+		if ( gamesMauro > 0 ) {
+			winnersMap.put("Mauro", balanceMauro);
+		}
+		if ( gamesRenzo > 0 ) {
+			winnersMap.put("Renzo", balanceRenzo);
+		}
+		if ( gamesOthers > 0 ) {
+			winnersMap.put("Others", balanceOthers);
+		}
 		
         List<Map.Entry<String, Float>> list = new LinkedList<Map.Entry<String, Float>>(winnersMap.entrySet());
 
