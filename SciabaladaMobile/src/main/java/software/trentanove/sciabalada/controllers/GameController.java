@@ -79,7 +79,7 @@ public class GameController {
     @RequestMapping(value="/deleteGame",method = RequestMethod.GET)  
     public String delete(@RequestParam(value = "id", required = true) int id, @RequestParam(value = "year", required = true) String year) {  
         dao.deleteGame(id);  
-        return "redirect://listGamesByYear/"+year;  
+        return "redirect:/listGamesByYear/"+year;  
     }   
     
     @RequestMapping("/aiPrediction")  
